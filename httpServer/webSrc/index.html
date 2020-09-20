@@ -1,14 +1,17 @@
-<!DOCTYPE HTML/>
+ï»¿<!DOCTYPE HTML/>
 <html>
-    <head>
-        <title>Accueil</title>
-        <meta charset="iso-8859-1" />
-        <link rel="stylesheet" href="index.css" />
-    </head>
+<head>
+    <title>Home</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="img" />
+    <link rel="stylesheet" href="index.css" />
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="index.js"></script>
+</head>
     <body>
-        <h1>Bienvenue à l'accueil</h1>
-        <p onclick="alert('coucou');">Veuillez rentrer vos informations :</p>
-        <form method="post" action="/bonjour">
+        <h1>Welcome home !</h1>
+        <p onclick="alert('Don\'t you believe me ?');">Please fill this form : (No mail will be sent and no password will be stolen)</p>
+        <form method="post" action="/sendmail">
 
             <label for="sender">Sender: </label>
             <input type="email" name="sender" required />
@@ -25,8 +28,8 @@
             <textarea name="body" placeholder="Your mail..."></textarea>
             <br />
             <br />
-            <input type="submit" value="Envoyer" />
+            <input type="submit" value="Send(not)" />
         </form>
-        <input type="button" value="Voir un canarticho" onclick="window.location = '/img';"/>
+        <input type="button" id="farfetchd" value="See a Farfetch'd" onclick="window.location = '/img';"/>
     </body>
 </html>

@@ -15,33 +15,47 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="HttpServer.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="sendMail.cpp">
+    <ClCompile Include="Log.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="example.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="index.html">
-      <Filter>Fichiers de ressources</Filter>
-    </None>
-    <None Include="error.html">
-      <Filter>Fichiers de ressources</Filter>
-    </None>
-    <None Include="bonjour.html">
-      <Filter>Fichiers de ressources</Filter>
-    </None>
     <None Include="easendmailobj.tlh">
       <Filter>Fichiers d%27en-tête</Filter>
     </None>
-    <None Include="index.css">
+    <None Include="webSrc\error.html">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="webSrc\index.css">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="webSrc\index.html">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="webSrc\sendmail.html">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="webSrc\index.js">
       <Filter>Fichiers de ressources</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sendMail.h">
+    <ClInclude Include="HttpServer.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="webSrc\img.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
   </ItemGroup>
 </Project>

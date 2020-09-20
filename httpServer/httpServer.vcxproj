@@ -131,18 +131,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="sendMail.cpp" />
+    <ClCompile Include="HttpServer.cpp" />
+    <ClCompile Include="Log.cpp" />
+    <ClCompile Include="example.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="bonjour.html" />
     <None Include="easendmailobj.tlh" />
-    <None Include="error.html" />
-    <None Include="index.css" />
-    <None Include="index.html" />
+    <None Include="webSrc\index.js" />
+    <None Include="webSrc\sendmail.html" />
+    <None Include="webSrc\error.html" />
+    <None Include="webSrc\index.css" />
+    <None Include="webSrc\index.html" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sendMail.h" />
+    <ClInclude Include="HttpServer.h" />
+    <ClInclude Include="Log.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="webSrc\img.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
