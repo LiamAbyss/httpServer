@@ -72,7 +72,7 @@ HttpServer& HttpServer::req(std::string url, unsigned short code, std::string mi
 	buffer.code = code;
 	buffer.mimeType = mimeType;
 	buffer.filename = filename;
-
+	downloadFile(filename);
 	urlChars.push_back(buffer);
 
 	return *this;
@@ -86,6 +86,7 @@ HttpServer& HttpServer::req(std::string url, unsigned short code, std::string mi
 	buffer.mimeType = mimeType;
 	buffer.filename = filename;
 	buffer.callback = callback;
+	downloadFile(filename);
 
 	urlChars.push_back(buffer);
 
@@ -177,8 +178,8 @@ void HttpServer::sendHTML()
 
 	if (found)
 	{
-		std::string page;
-		std::ifstream file(filename.c_str(), std::ifstream::binary);
+		std::string page = savedFiles[filename];
+		/*std::ifstream file(filename.c_str(), std::ifstream::binary);
 		bool started = false;
 		while (file.good())
 		{
@@ -190,7 +191,7 @@ void HttpServer::sendHTML()
 			std::string buffer;
 			std::getline(file, buffer);
 			page += buffer;
-		}
+		}*/
 		for (auto& var : parsedUrl)
 		{
 			while (page.find(var.first) != std::string::npos)
@@ -276,6 +277,28 @@ std::string HttpServer::percentDecode(std::string s)
 		}
 	}
 	return s;
+}
+
+void HttpServer::downloadFile(std::string filename)
+{
+	std::string fileStr;
+	if (savedFiles.find(filename) == savedFiles.end())
+	{
+		std::ifstream file(filename.c_str(), std::ifstream::binary);
+		bool started = false;
+		while (file.good())
+		{
+			if (!started)
+			{
+				started = !started;
+			}
+			else fileStr += '\n';
+			std::string buffer;
+			std::getline(file, buffer);
+			fileStr += buffer;
+		}
+		savedFiles.emplace(filename, fileStr);
+	}
 }
 
 std::vector<std::string> sToVect(std::string s, std::string delimiter)

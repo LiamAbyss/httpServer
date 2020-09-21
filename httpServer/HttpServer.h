@@ -186,6 +186,10 @@ private:
 	 * The location of the request.
 	 */
 	std::string requestLocation;
+
+	std::map<std::string, std::string> savedFiles;
+
+	void downloadFile(std::string filename);
 };
 
 /** 
