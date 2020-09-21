@@ -31,8 +31,10 @@ int main()
 		.req("/sendmail", 200, "text/html", "webSrc/sendmail.html", doStuff) // Uses doStuff(UrlChar*) as a callback
 		.req("/img", 200, "image/png", "webSrc/img.png")
 		.req("/ogg", 200, "audio/ogg", "webSrc/mettaton.ogg")
-		.req("/", 301, "/home")
-		.launch(); // Launches the server
-
+		.req("/", 301, "/home");
+	Thread launch(&HttpServer::launch, &server);
+	Thread answer(&HttpServer::answer, &server);
+	launch.launch();
+	answer.launch();
 	return 0;
 }

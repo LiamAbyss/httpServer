@@ -5,6 +5,7 @@
 #include <map>
 #include <fstream>
 #include <functional>
+#include <queue>
 #include "Log.h"
 
 #define REQUEST_SIZE 5000
@@ -81,6 +82,8 @@ public:
 	 */
 	void launch();
 
+	void answer();
+
 	/**
 	 * \public
 	 * Manages the response for a given url.
@@ -145,7 +148,7 @@ private:
 	 * \private
 	 * Sends the response to the request.
 	 */
-	void sendHTML();
+	//void sendHTML();
 
 	/** 
 	 * \private
@@ -179,13 +182,17 @@ private:
 	 * \private
 	 * The socket connected to the client.
 	 */
-	sf::TcpSocket client;
+	//sf::TcpSocket client;
 
 	/** 
 	 * \private
 	 * The location of the request.
 	 */
-	std::string requestLocation;
+	//std::string requestLocation;
+	
+	std::queue<std::pair<std::string, std::unique_ptr<sf::TcpSocket>>> requestList;
+
+	sf::Mutex mutex;
 
 	std::map<std::string, std::string> savedFiles;
 
