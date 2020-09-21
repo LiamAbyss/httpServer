@@ -175,43 +175,6 @@ void HttpServer::sendHTML()
 		}
 	}
 
-	/*if (parsedUrl["$$Location"] == "/accueil")
-	{
-		head = "HTTP/1.1 200 OK\nContent-Type: text/html\n";
-		filename = "index.html";
-	}
-	else if (parsedUrl["$$Location"] == "/bonjour")
-	{
-		head = "HTTP/1.1 200 OK\nContent-Type: text/html\n";
-		/*Mail_ mail;
-		mail.sender = parsedUrl["$sender"];
-		mail.recipient = parsedUrl["$recipient"];
-		mail.password = parsedUrl["$password"];
-		mail.subject = parsedUrl["$subject"];
-		mail.body = parsedUrl["$body"];*
-		//mail.send();
-		filename = "bonjour.html";
-	}
-	else if (parsedUrl["$$Location"] == "/img")
-	{
-		head = "HTTP/1.1 200 OK\nContent-Type: image/png\n";
-		filename = "img.png";
-	}
-	else if (parsedUrl["$$Location"] == "/index.css")
-	{
-		head = "HTTP/1.1 200 OK\nContent-Type: text/plain\n";
-		filename = "index.css";
-	}
-	else if (parsedUrl["$$Location"] == "/")
-	{
-		head = "HTTP/1.1 301 REDIRECT\nContent-Type: text/html\nLocation: /accueil\n";
-		filename = "error.html";
-	}
-	else
-	{
-		head = "HTTP/1.1 404 NOT FOUND\nContent-Type: text/html\n"; //use Location: <url> + 3XX code to redirect
-		filename = "error.html";
-	}*/
 	if (found)
 	{
 		std::string page;
@@ -266,6 +229,7 @@ std::string HttpServer::percentDecode(std::string s)
 {
 	std::map<std::string, std::string> reserved = {
 		{"%21", "!"},
+		{"%22", "\""},
 		{"%23", "#"},
 		{"%24", "$"},
 		{"%25", "%"},

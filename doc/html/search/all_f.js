@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['white_51',['WHITE',['../_log_8h.html#a821042d5f30537f776ce823c5d66aadaab5bf627e448384cf3a4c35121ca6008d',1,'Log.h']]]
+  ['yellow_52',['YELLOW',['../_log_8h.html#a821042d5f30537f776ce823c5d66aadaa8a568e5f41b7e4da88fe5c4a00aad34e',1,'Log.h']]]
 ];

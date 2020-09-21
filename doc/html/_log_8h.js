@@ -1,7 +1,6 @@
 var _log_8h =
 [
     [ "Log", "class_log.html", "class_log" ],
-    [ "_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING", "_log_8h.html#a0840c0135e6d38401f4bcde93f8e6de6", null ],
     [ "ConsoleColor", "_log_8h.html#a821042d5f30537f776ce823c5d66aada", [
       [ "BLUE", "_log_8h.html#a821042d5f30537f776ce823c5d66aadaa1b3e1ee9bff86431dea6b181365ba65f", null ],
       [ "GREEN", "_log_8h.html#a821042d5f30537f776ce823c5d66aadaa9de0e5dd94e861317e74964bed179fa0", null ],

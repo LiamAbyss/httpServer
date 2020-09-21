@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['launch_62',['launch',['../class_http_server.html#ab4c4a5acd8414ea4704537983f60e197',1,'HttpServer']]],
-  ['log_63',['Log',['../class_log.html#a39ab61a2feb2345c1763e25ec146a2c0',1,'Log']]]
+  ['httpserver_62',['HttpServer',['../class_http_server.html#ac53fa02eb2cf84f80d81f8412da4bca1',1,'HttpServer']]]
 ];

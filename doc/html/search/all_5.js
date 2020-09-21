@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['filename_16',['filename',['../class_url_char.html#ae26572dc72d0752e1c5b57a68cbb7a0e',1,'UrlChar']]],
-  ['first_17',['first',['../class_log.html#a6075b525656d61df6724c861595952c1',1,'Log']]],
-  ['firstcolor_18',['firstColor',['../class_log.html#ac993d33cb8f27255b1e94e162de5580d',1,'Log']]]
+  ['green_19',['GREEN',['../_log_8h.html#a821042d5f30537f776ce823c5d66aadaa9de0e5dd94e861317e74964bed179fa0',1,'Log.h']]],
+  ['grey_20',['GREY',['../_log_8h.html#a821042d5f30537f776ce823c5d66aadaa3c551f0d1a06b4f852d1832daed357bf',1,'Log.h']]]
 ];

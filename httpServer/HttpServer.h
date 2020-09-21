@@ -133,20 +133,75 @@ public:
 
 private:
 
+	/**
+	 * \private
+	 * Parse the request to isolate variables.
+	 * \param request The full Http Request as a string.
+	 * \return A percent encoded string containing the variables.
+	 */
 	std::string parseContent(std::string request);
+
+	/** 
+	 * \private
+	 * Sends the response to the request.
+	 */
 	void sendHTML();
 
+	/** 
+	 * \private
+	 * Contains all the characteristics of all the actions related to the urls.
+	 */
 	std::vector<UrlChar> urlChars;
 
+	/**
+	 * \private
+	 * Isolate the variables from the url of the Http request.
+	 * \param url The url with the variables (as if it was a GET).
+	 * \return All the variables
+	 */
 	std::map<std::string, std::string> parseUrlLocation(std::string url);
 
+	/**
+	 * \private
+	 * Decode a percent encoded string.
+	 * \param s The string to decode.
+	 * \return The decoded string.
+	 */
 	std::string percentDecode(std::string s);
 
+	/** 
+	 * \private
+	 * The listener of the server.
+	 */
 	sf::TcpListener listener;
+
+	/** 
+	 * \private
+	 * The socket connected to the client.
+	 */
 	sf::TcpSocket client;
+
+	/** 
+	 * \private
+	 * The location of the request.
+	 */
 	std::string requestLocation;
 };
 
-
+/** 
+ * Converts a string into a vector<string> of tokens splitted around a delimiter.
+ * \param s The original string.
+ * \param delimiter The delimiter around which to split.
+ * \return A vector of string tokens.
+ */
 std::vector<std::string> sToVect(std::string s, std::string delimiter);
+
+/** 
+ * Replace a string by another in a string.
+ * \param s The original string.
+ * \param a The string to replace.
+ * \param b The replacing string.
+ * \return The modified string.
+ * \note \c s is modified \b and returned by this function.
+ */
 std::string replace(std::string& s, std::string a, std::string b);

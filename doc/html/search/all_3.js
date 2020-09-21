@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['date_14',['date',['../class_log.html#a23d377356df1c062de2555da9f31f7d5',1,'Log']]]
+  ['example_2ecpp_15',['example.cpp',['../example_8cpp.html',1,'']]]
 ];

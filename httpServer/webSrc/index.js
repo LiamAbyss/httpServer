@@ -1,4 +1,7 @@
 $("document").ready(function(){
+
+	console.log($someVariable);
+
 	$("#farfetchd").mouseenter(function(){
 		$("#farfetchd").css("backgroundColor", "red");
 	});

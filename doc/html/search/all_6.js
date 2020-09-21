@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['green_19',['GREEN',['../_log_8h.html#a821042d5f30537f776ce823c5d66aadaa9de0e5dd94e861317e74964bed179fa0',1,'Log.h']]],
-  ['grey_20',['GREY',['../_log_8h.html#a821042d5f30537f776ce823c5d66aadaa3c551f0d1a06b4f852d1832daed357bf',1,'Log.h']]]
+  ['httpserver_21',['HttpServer',['../class_http_server.html',1,'HttpServer'],['../class_http_server.html#ac53fa02eb2cf84f80d81f8412da4bca1',1,'HttpServer::HttpServer()']]],
+  ['httpserver_2ecpp_22',['HttpServer.cpp',['../_http_server_8cpp.html',1,'']]],
+  ['httpserver_2eh_23',['HttpServer.h',['../_http_server_8h.html',1,'']]]
 ];

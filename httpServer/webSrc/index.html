@@ -6,7 +6,8 @@
     <link rel="icon" type="image/png" href="img" />
     <link rel="stylesheet" href="index.css" />
     <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="index.js"></script>
+    <script src="index.js?someVariable='$myVariable'"></script>
+    <!-- For now, you can't call $myVariable $someVariable because it leads to infinte loop. Will fix it soon. -->
 </head>
     <body>
         <h1>Welcome home !</h1>

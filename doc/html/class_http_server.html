@@ -201,6 +201,13 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Parse the request to isolate variables. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>The full Http Request as a string. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A percent encoded string containing the variables. </dd></dl>
 
 </div>
 </div>
@@ -227,6 +234,13 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Isolate the variables from the url of the Http request. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">url</td><td>The url with the variables (as if it was a GET). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>All the variables </dd></dl>
 
 </div>
 </div>
@@ -253,6 +267,13 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Decode a percent encoded string. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>The string to decode. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The decoded string. </dd></dl>
 
 </div>
 </div>
@@ -487,6 +508,7 @@ The callback function is called <b>before</b> anything is done with other member
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Sends the response to the request. </p>
 
 </div>
 </div>
@@ -510,6 +532,7 @@ The callback function is called <b>before</b> anything is done with other member
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The socket connected to the client. </p>
 
 </div>
 </div>
@@ -532,6 +555,7 @@ The callback function is called <b>before</b> anything is done with other member
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The listener of the server. </p>
 
 </div>
 </div>
@@ -554,6 +578,7 @@ The callback function is called <b>before</b> anything is done with other member
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The location of the request. </p>
 
 </div>
 </div>
@@ -576,6 +601,7 @@ The callback function is called <b>before</b> anything is done with other member
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Contains all the characteristics of all the actions related to the urls. </p>
 
 </div>
 </div>
