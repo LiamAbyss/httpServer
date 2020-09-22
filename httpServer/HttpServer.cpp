@@ -12,12 +12,15 @@ HttpServer::HttpServer(int port)
 void HttpServer::launch(int threadNumber)
 {
 	sf::Thread listener(&HttpServer::listen, this);
-	for(int i = 0; i < threadNumber; i++)
-		threads.push_back(std::make_unique<sf::Thread>(&HttpServer::answer, this));
-	listener.launch();
-	for(auto& f : threads)
+	for (int i = 0; i < threadNumber; i++)
 	{
-		f->launch();
+		threads.push_back(std::make_unique<sf::Thread>(&HttpServer::answer, this));
+		threads.push_back(std::make_unique<sf::Thread>(&HttpServer::listen, this));
+	}
+	for (int i = 0; i < threadNumber * 2; i++)
+	{
+		threads[i++]->launch();
+		threads[i]->launch();
 		sf::sleep(sf::milliseconds(100));
 		threadIndex++;
 	}
@@ -25,31 +28,31 @@ void HttpServer::launch(int threadNumber)
 
 void HttpServer::listen()
 {
-	mutex.lock();
-	requestList.push(std::make_pair("", std::make_unique<sf::TcpSocket>()));
-	mutex.unlock();
+	int index = threadIndex;
+	std::unique_ptr<sf::TcpSocket> client = std::make_unique<sf::TcpSocket>();
 	std::string requestLocation;
-	while (listener.accept(*requestList.back().second) == sf::Socket::Status::Done)
+	client->setBlocking(true);
+	while (listener.accept(*client) == sf::Socket::Status::Done)
 	{
 		char request[REQUEST_SIZE];
 		size_t received;
 		requestLocation.clear();
 		std::string fullRequest;
 
-		if (requestList.back().second->receive(request, REQUEST_SIZE, received) == sf::Socket::Done)
+		if (client->receive(request, REQUEST_SIZE, received) == sf::Socket::Done)
 		{
 			if (received < REQUEST_SIZE)
 				request[received] = '\0';
 			fullRequest += request;
-			requestList.back().second->setBlocking(false);
+			client->setBlocking(false);
 			//sleep(milliseconds(100));
-			while (requestList.back().second->receive(request, REQUEST_SIZE, received) == sf::Socket::Done)
+			while (client->receive(request, REQUEST_SIZE, received) == sf::Socket::Done)
 			{
 				if (received < REQUEST_SIZE)
 					request[received] = '\0';
 				fullRequest += request;
 			}
-			requestList.back().second->setBlocking(true);
+			client->setBlocking(true);
 			int i = -1;
 			bool ok = false;
 			while (fullRequest[i + 1] != '\n' && fullRequest[i + 1] != '\0')
@@ -65,34 +68,30 @@ void HttpServer::listen()
 			}
 
 			mutex.lock();
-			Log("Request (" + requestList.back().second->getRemoteAddress().toString() + ")", requestLocation, (int)ConsoleColor::PINK).print();
+			Log("Request (" + client->getRemoteAddress().toString() + ")", requestLocation + " (Thread " + std::to_string(index) + ")", (int)ConsoleColor::PINK).print();
 			mutex.unlock();
 
 			if (fullRequest.find("POST") != std::string::npos)
 			{
 				requestLocation = requestLocation + "?" + parseContent(fullRequest);
 			}
-			mutex.lock();
-			requestList.back().first = requestLocation;
-			requestList.push(std::make_pair("", std::make_unique<sf::TcpSocket>()));
-			mutex.unlock();
-			//cout << "Connected..." << endl;
-			/*string page = "HTTP/1.0 200 OK\nContent-Type: text/html\nContent-Length: 59\n\n<TITLE>Exemple</TITLE>\n<P>Ceci est une page d'exemple.</P>";
 
-			client.send(page.c_str(), page.size() + 1);*/
-			//sendHTML();
-			//cout << "Packet sent" << endl;
+			mutex.lock();
+			requestList.push(std::make_pair(requestLocation, std::make_unique<sf::TcpSocket>()));
+			requestList.back().second.reset(client.release());
+			client = std::make_unique<sf::TcpSocket>();
+			mutex.unlock();
 		}
 	}
 }
 
 void HttpServer::answer()
 {
-	int i = threadIndex;
+	int index = threadIndex;
 	while (true)
 	{
 		mutex.lock();
-		if (requestList.size() > 1)
+		if (!requestList.empty())
 		{
 			std::string requestLocation = requestList.front().first;
 			std::unique_ptr<sf::TcpSocket> client(requestList.front().second.release());
@@ -103,6 +102,7 @@ void HttpServer::answer()
 			std::string head;
 			std::map<std::string, std::string> parsedUrl = parseUrlLocation(requestLocation);
 
+			std::string mimeType;
 			bool found = false;
 			for (auto& f : urlChars)
 			{
@@ -114,6 +114,7 @@ void HttpServer::answer()
 					if (f.callback)
 						f.callback(&f);
 
+					mimeType = f.mimeType;
 					head = "HTTP/1.1 " + std::to_string(f.code) + "\nContent-Type: " + f.mimeType + "\n";
 					if (f.code >= 300 && f.code < 400)
 					{
@@ -121,7 +122,7 @@ void HttpServer::answer()
 					}
 					filename = f.filename;
 					mutex.lock();
-					Log("Response (" + client->getRemoteAddress().toString() + ")", requestLocation + " FOUND (Thread " + std::to_string(i) + ")", (int)ConsoleColor::GREEN).print();
+					Log("Response (" + client->getRemoteAddress().toString() + ")", requestLocation + " FOUND (Thread " + std::to_string(index) + ")", (int)ConsoleColor::GREEN).print();
 					mutex.unlock();
 					break;
 				}
@@ -164,10 +165,16 @@ void HttpServer::answer()
 					std::getline(file, buffer);
 					page += buffer;
 				}*/
-				for (auto& var : parsedUrl)
+				if (mimeType.find("text") != std::string::npos || mimeType.find("application") != std::string::npos)
 				{
-					while (page.find(var.first) != std::string::npos)
-						page = replace(page, var.first, var.second);
+					for (auto& var : parsedUrl)
+					{
+						std::regex r("\\$");
+						r = std::regex(std::regex_replace(var.first, r, "\\$"));
+						page = std::regex_replace(page, r, var.second);
+					}
+					std::regex r("\\$[a-zA-Z0-9]*");
+					page = std::regex_replace(page, r, "null");
 				}
 				head += "Content-Length: " + std::to_string(page.size()) + "\n\n" + page;
 				mutex.lock();
@@ -194,7 +201,7 @@ void HttpServer::answer()
 HttpServer& HttpServer::req(std::string url, unsigned short code, std::string mimeType, std::string filename)
 {
 	UrlChar buffer;
-	buffer.url = url;
+	buffer.url = formatUrl(url);
 	buffer.code = code;
 	buffer.mimeType = mimeType;
 	buffer.filename = filename;
@@ -207,7 +214,7 @@ HttpServer& HttpServer::req(std::string url, unsigned short code, std::string mi
 HttpServer& HttpServer::req(std::string url, unsigned short code, std::string mimeType, std::string filename, std::function<void(UrlChar*)> callback)
 {
 	UrlChar buffer;
-	buffer.url = url;
+	buffer.url = formatUrl(url);
 	buffer.code = code;
 	buffer.mimeType = mimeType;
 	buffer.filename = filename;
@@ -222,7 +229,7 @@ HttpServer& HttpServer::req(std::string url, unsigned short code, std::string mi
 HttpServer& HttpServer::req(std::string url, unsigned short code, std::string redirectUrl)
 {
 	UrlChar buffer;
-	buffer.url = url;
+	buffer.url = formatUrl(url);
 	buffer.code = code;
 	buffer.redirectUrl = redirectUrl;
 	buffer.mimeType = "text/plain";
@@ -235,7 +242,7 @@ HttpServer& HttpServer::req(std::string url, unsigned short code, std::string re
 HttpServer& HttpServer::req(std::string url, unsigned short code, std::string redirectUrl, std::function<void(UrlChar*)> callback)
 {
 	UrlChar buffer;
-	buffer.url = url;
+	buffer.url = formatUrl(url);
 	buffer.code = code;
 	buffer.redirectUrl = redirectUrl;
 	buffer.mimeType = "text/plain";
@@ -255,86 +262,7 @@ std::string HttpServer::parseContent(std::string request)
 	return res;
 }
 
-/*void HttpServer::sendHTML()
-{
-	std::string filename;
-	std::string head;
-	std::map<std::string, std::string> parsedUrl = parseUrlLocation(requestLocation);
-
-	bool found = false;
-	for(auto &f : urlChars)
-	{
-		if(parsedUrl["$$Location"] == f.url)
-		{
-			found = true;
-
-			f.var = &parsedUrl;
-			if (f.callback)
-				f.callback(&f);
-
-			head = "HTTP/1.1 " + std::to_string(f.code) + "\nContent-Type: " + f.mimeType + "\n";
-			if(f.code >= 300 && f.code < 400)
-			{
-				head += "Location: " + f.redirectUrl + "\n";
-			}
-			filename = f.filename;
-			Log("Response (" + client.getRemoteAddress().toString() + ")", requestLocation + " FOUND", (int)ConsoleColor::GREEN).print();
-			break;
-		}
-	}
-	if(!found)
-	{
-		Log("Response (" + client.getRemoteAddress().toString() + ")", requestLocation + " NOT FOUND", (int)ConsoleColor::RED).print();
-
-		for(auto &f : urlChars)
-		{
-			if(f.code == 404 || f.url == "default")
-			{
-				found = true;
-				
-				f.var = &parsedUrl;
-				if(f.callback)
-					f.callback(&f);
-
-				head = "HTTP/1.1 " + std::to_string(f.code) + "\nContent-Type: " + f.mimeType +"\n";
-				filename = f.filename;
-			}
-		}
-	}
-
-	if (found)
-	{
-		std::string page = savedFiles[filename];
-		/*std::ifstream file(filename.c_str(), std::ifstream::binary);
-		bool started = false;
-		while (file.good())
-		{
-			if (!started)
-			{
-				started = !started;
-			}
-			else page += '\n';
-			std::string buffer;
-			std::getline(file, buffer);
-			page += buffer;
-		}*
-		for (auto& var : parsedUrl)
-		{
-			while (page.find(var.first) != std::string::npos)
-				page = replace(page, var.first, var.second);
-		}
-		head += "Content-Length: " + std::to_string(page.size()) + "\n\n" + page;
-
-		client.send(head.c_str(), head.size() + 1);
-	}
-	else
-	{
-		std::string s = "HTTP/1.1 404 NOT FOUND\nContent-Type: text/html\nContent-Length: 155\n\n<!DOCTYPE HTML/>\n<html>\n<head>\n<title>Page Not Found</title>\n<meta charset=\"iso-8859-1\"/>\n</head><body>\n<h1>Error 404 : Page Not Found</h1>\n</body>\n</html>";
-		client.send(s.c_str(), s.size() + 1);
-	}
-}*/
-
-std::map<std::string, std::string> HttpServer::parseUrlLocation(std::string url)
+std::map<std::string, std::string> HttpServer::parseUrlLocation(std::string url) const
 {
 	std::map<std::string, std::string> res;
 	res.emplace("$$Location", url.substr(0, url.find("?")));
@@ -352,7 +280,16 @@ std::map<std::string, std::string> HttpServer::parseUrlLocation(std::string url)
 	return res;
 }
 
-std::string HttpServer::percentDecode(std::string s)
+std::string HttpServer::formatUrl(std::string url) const
+{
+	if (!url.empty() && url[0] != '/')
+		url = "/" + url;
+	if (!url.empty() && url[url.size() - 1] == '/')
+		url.resize(url.size() - 1);
+	return url;
+}
+
+std::string HttpServer::percentDecode(std::string s) const
 {
 	std::map<std::string, std::string> reserved = {
 		{"%21", "!"},

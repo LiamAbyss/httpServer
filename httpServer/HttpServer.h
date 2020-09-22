@@ -7,6 +7,7 @@
 #include <functional>
 #include <queue>
 #include "Log.h"
+#include <regex>
 
 #define REQUEST_SIZE 5000
 
@@ -161,7 +162,15 @@ private:
 	 * \param url The url with the variables (as if it was a GET).
 	 * \return All the variables
 	 */
-	std::map<std::string, std::string> parseUrlLocation(std::string url);
+	std::map<std::string, std::string> parseUrlLocation(std::string url) const;
+
+	/**
+	 * \private
+	 * Format the url to always match the request.
+	 * \param s The url.
+	 * \return The formatted url;
+	 */
+	std::string formatUrl(std::string url) const;
 
 	/**
 	 * \private
@@ -169,7 +178,7 @@ private:
 	 * \param s The string to decode.
 	 * \return The decoded string.
 	 */
-	std::string percentDecode(std::string s);
+	std::string percentDecode(std::string s) const;
 
 	/** 
 	 * \private
@@ -214,6 +223,10 @@ private:
 	 * Makes the server answer.
 	 */
 	void answer();
+
+	/** 
+	 * Used to index each thread.
+	 */
 	int threadIndex = 0;
 };
 

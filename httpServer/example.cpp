@@ -15,8 +15,8 @@ void doStuff(UrlChar* chars)
 	auto& var = *chars->var;
 	if(var.find("$body") == var.end() || var.find("$sender") == var.end() || var.find("$recipient") == var.end())
 	{
-		chars->code = 301;
-		chars->redirectUrl = "/home";
+		/*chars->code = 301;
+		chars->redirectUrl = "/home";*/
 		return;
 	}
 
@@ -37,6 +37,6 @@ int main()
 		.req("/img", 200, "image/png", "webSrc/img.png")
 		.req("/ogg", 200, "audio/ogg", "webSrc/mettaton.ogg")
 		.req("/loaderio-4db54377b4e344be0bc09288db5301eb.txt", 200, "text/plain", "webSrc/loaderio-4db54377b4e344be0bc09288db5301eb.txt")
-		.req("/", 301, "/home").launch(2);
+		.req("/", 301, "/home").launch(3);
 	return 0;
 }

@@ -117,10 +117,12 @@ Public Member Functions</h2></td></tr>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a6f665b9b51556af36006e16d4b9af7c6"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#a6f665b9b51556af36006e16d4b9af7c6">parseContent</a> (std::string request)</td></tr>
 <tr class="separator:a6f665b9b51556af36006e16d4b9af7c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0ed185e3ff862c81038db280da061f2"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#aa0ed185e3ff862c81038db280da061f2">parseUrlLocation</a> (std::string url)</td></tr>
-<tr class="separator:aa0ed185e3ff862c81038db280da061f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abda047aafab3940833c2666c268322ae"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#abda047aafab3940833c2666c268322ae">percentDecode</a> (std::string s)</td></tr>
-<tr class="separator:abda047aafab3940833c2666c268322ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acef1afcbbfd2a6d27b2b00c545833a8f"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#acef1afcbbfd2a6d27b2b00c545833a8f">parseUrlLocation</a> (std::string url) const</td></tr>
+<tr class="separator:acef1afcbbfd2a6d27b2b00c545833a8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10de43e4b6ae9d2f8376ad54534d6510"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#a10de43e4b6ae9d2f8376ad54534d6510">formatUrl</a> (std::string url) const</td></tr>
+<tr class="separator:a10de43e4b6ae9d2f8376ad54534d6510"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a634dd490151570071b5a5ad08a8f1cf7"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#a634dd490151570071b5a5ad08a8f1cf7">percentDecode</a> (std::string s) const</td></tr>
+<tr class="separator:a634dd490151570071b5a5ad08a8f1cf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d57f0987be2b2c6fc0e01ae212504ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#a6d57f0987be2b2c6fc0e01ae212504ee">downloadFile</a> (std::string filename)</td></tr>
 <tr class="separator:a6d57f0987be2b2c6fc0e01ae212504ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -220,6 +222,39 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a10de43e4b6ae9d2f8376ad54534d6510"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10de43e4b6ae9d2f8376ad54534d6510">&#9670;&nbsp;</a></span>formatUrl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string HttpServer::formatUrl </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>url</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Format the url to always match the request. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>The url. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The formatted url; </dd></dl>
+
+</div>
+</div>
 <a id="af478f57beeeddcb98dd625196c6461b0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af478f57beeeddcb98dd625196c6461b0">&#9670;&nbsp;</a></span>launch()</h2>
 
@@ -295,8 +330,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aa0ed185e3ff862c81038db280da061f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa0ed185e3ff862c81038db280da061f2">&#9670;&nbsp;</a></span>parseUrlLocation()</h2>
+<a id="acef1afcbbfd2a6d27b2b00c545833a8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acef1afcbbfd2a6d27b2b00c545833a8f">&#9670;&nbsp;</a></span>parseUrlLocation()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -309,7 +344,7 @@ Private Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>url</em></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -328,8 +363,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="abda047aafab3940833c2666c268322ae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abda047aafab3940833c2666c268322ae">&#9670;&nbsp;</a></span>percentDecode()</h2>
+<a id="a634dd490151570071b5a5ad08a8f1cf7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a634dd490151570071b5a5ad08a8f1cf7">&#9670;&nbsp;</a></span>percentDecode()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -342,7 +377,7 @@ Private Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>s</em></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -681,6 +716,7 @@ The callback function is called <b>before</b> anything is done with other member
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Used to index each thread. </p>
 
 </div>
 </div>

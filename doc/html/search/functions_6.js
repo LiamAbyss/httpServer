@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['replace_78',['replace',['../_http_server_8cpp.html#a1e3321f1003bbf5b8c2089415e33797b',1,'replace(std::string &amp;s, std::string a, std::string b):&#160;HttpServer.cpp'],['../_http_server_8h.html#a1e3321f1003bbf5b8c2089415e33797b',1,'replace(std::string &amp;s, std::string a, std::string b):&#160;HttpServer.cpp']]],
-  ['req_79',['req',['../class_http_server.html#a8769f91789e3767a08684bda40b6d3c4',1,'HttpServer::req(std::string url, unsigned short code, std::string mimeType, std::string filename)'],['../class_http_server.html#a0170cc43d672a2f009276520b324d487',1,'HttpServer::req(std::string url, unsigned short code, std::string mimeType, std::string filename, std::function&lt; void(UrlChar *)&gt; callback)'],['../class_http_server.html#af37e56b73b82fe88e0e569d50e306e29',1,'HttpServer::req(std::string url, unsigned short code, std::string redirectUrl)'],['../class_http_server.html#a1f5bf9b71840ee1c2c43f798c478f053',1,'HttpServer::req(std::string url, unsigned short code, std::string redirectUrl, std::function&lt; void(UrlChar *)&gt; callback)']]]
+  ['parsecontent_76',['parseContent',['../class_http_server.html#a6f665b9b51556af36006e16d4b9af7c6',1,'HttpServer']]],
+  ['parseurllocation_77',['parseUrlLocation',['../class_http_server.html#acef1afcbbfd2a6d27b2b00c545833a8f',1,'HttpServer']]],
+  ['percentdecode_78',['percentDecode',['../class_http_server.html#a634dd490151570071b5a5ad08a8f1cf7',1,'HttpServer']]],
+  ['print_79',['print',['../class_log.html#ac765b7cc014cf47218adb2fd5f48a13f',1,'Log']]]
 ];

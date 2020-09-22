@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['httpserver_69',['HttpServer',['../class_http_server.html#ac53fa02eb2cf84f80d81f8412da4bca1',1,'HttpServer']]]
+  ['formaturl_70',['formatUrl',['../class_http_server.html#a10de43e4b6ae9d2f8376ad54534d6510',1,'HttpServer']]]
 ];
