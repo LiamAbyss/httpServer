@@ -98,8 +98,8 @@ $(document).ready(function(){initNavTree('class_http_server.html',''); initResiz
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac53fa02eb2cf84f80d81f8412da4bca1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#ac53fa02eb2cf84f80d81f8412da4bca1">HttpServer</a> (int port=sf::Socket::AnyPort)</td></tr>
 <tr class="separator:ac53fa02eb2cf84f80d81f8412da4bca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4c4a5acd8414ea4704537983f60e197"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#ab4c4a5acd8414ea4704537983f60e197">launch</a> ()</td></tr>
-<tr class="separator:ab4c4a5acd8414ea4704537983f60e197"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af478f57beeeddcb98dd625196c6461b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#af478f57beeeddcb98dd625196c6461b0">launch</a> (int threadNumber=1)</td></tr>
+<tr class="separator:af478f57beeeddcb98dd625196c6461b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8769f91789e3767a08684bda40b6d3c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_http_server.html">HttpServer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#a8769f91789e3767a08684bda40b6d3c4">req</a> (std::string url, unsigned short code, std::string mimeType, std::string filename)</td></tr>
 <tr class="separator:a8769f91789e3767a08684bda40b6d3c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0170cc43d672a2f009276520b324d487"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_http_server.html">HttpServer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#a0170cc43d672a2f009276520b324d487">req</a> (std::string url, unsigned short code, std::string mimeType, std::string filename, std::function&lt; void(<a class="el" href="class_url_char.html">UrlChar</a> *)&gt; callback)</td></tr>
@@ -108,17 +108,21 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af37e56b73b82fe88e0e569d50e306e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f5bf9b71840ee1c2c43f798c478f053"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_http_server.html">HttpServer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#a1f5bf9b71840ee1c2c43f798c478f053">req</a> (std::string url, unsigned short code, std::string redirectUrl, std::function&lt; void(<a class="el" href="class_url_char.html">UrlChar</a> *)&gt; callback)</td></tr>
 <tr class="separator:a1f5bf9b71840ee1c2c43f798c478f053"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3247e2fb2549f418a60cef585bead13c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#a3247e2fb2549f418a60cef585bead13c">listen</a> ()</td></tr>
+<tr class="separator:a3247e2fb2549f418a60cef585bead13c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c8845f74f5e3458798abf53ff608a53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#a4c8845f74f5e3458798abf53ff608a53">answer</a> ()</td></tr>
+<tr class="separator:a4c8845f74f5e3458798abf53ff608a53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a6f665b9b51556af36006e16d4b9af7c6"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#a6f665b9b51556af36006e16d4b9af7c6">parseContent</a> (std::string request)</td></tr>
 <tr class="separator:a6f665b9b51556af36006e16d4b9af7c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac88c0057a5368e059661955a90a9a5c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#ac88c0057a5368e059661955a90a9a5c2">sendHTML</a> ()</td></tr>
-<tr class="separator:ac88c0057a5368e059661955a90a9a5c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0ed185e3ff862c81038db280da061f2"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#aa0ed185e3ff862c81038db280da061f2">parseUrlLocation</a> (std::string url)</td></tr>
 <tr class="separator:aa0ed185e3ff862c81038db280da061f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abda047aafab3940833c2666c268322ae"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#abda047aafab3940833c2666c268322ae">percentDecode</a> (std::string s)</td></tr>
 <tr class="separator:abda047aafab3940833c2666c268322ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d57f0987be2b2c6fc0e01ae212504ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#a6d57f0987be2b2c6fc0e01ae212504ee">downloadFile</a> (std::string filename)</td></tr>
+<tr class="separator:a6d57f0987be2b2c6fc0e01ae212504ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -126,10 +130,16 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a9ef7db2854bd5a5d41912c39bc3eda24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a666d85c396f04cc9c1e31afa2758b610"><td class="memItemLeft" align="right" valign="top">sf::TcpListener&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#a666d85c396f04cc9c1e31afa2758b610">listener</a></td></tr>
 <tr class="separator:a666d85c396f04cc9c1e31afa2758b610"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e889f53e9fb311ca25d84590f5acbe0"><td class="memItemLeft" align="right" valign="top">sf::TcpSocket&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#a1e889f53e9fb311ca25d84590f5acbe0">client</a></td></tr>
-<tr class="separator:a1e889f53e9fb311ca25d84590f5acbe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87719cae838745eef366e77777d1f76d"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#a87719cae838745eef366e77777d1f76d">requestLocation</a></td></tr>
-<tr class="separator:a87719cae838745eef366e77777d1f76d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6a0ee4514082ea720f5f836a2769b42"><td class="memItemLeft" align="right" valign="top">std::queue&lt; std::pair&lt; std::string, std::unique_ptr&lt; sf::TcpSocket &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#ac6a0ee4514082ea720f5f836a2769b42">requestList</a></td></tr>
+<tr class="separator:ac6a0ee4514082ea720f5f836a2769b42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87fe24c74560f3347f135d18259aadac"><td class="memItemLeft" align="right" valign="top">sf::Mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#a87fe24c74560f3347f135d18259aadac">mutex</a></td></tr>
+<tr class="separator:a87fe24c74560f3347f135d18259aadac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a197d289497f1e6b7be0208a2d160744a"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#a197d289497f1e6b7be0208a2d160744a">savedFiles</a></td></tr>
+<tr class="separator:a197d289497f1e6b7be0208a2d160744a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95e566628ed168f09766cb4209d8e645"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::unique_ptr&lt; sf::Thread &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#a95e566628ed168f09766cb4209d8e645">threads</a></td></tr>
+<tr class="separator:a95e566628ed168f09766cb4209d8e645"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae33b906a9962848a69aab075336003cd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_http_server.html#ae33b906a9962848a69aab075336003cd">threadIndex</a> = 0</td></tr>
+<tr class="separator:ae33b906a9962848a69aab075336003cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class allows to run a http server. </p>
@@ -160,8 +170,58 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab4c4a5acd8414ea4704537983f60e197"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4c4a5acd8414ea4704537983f60e197">&#9670;&nbsp;</a></span>launch()</h2>
+<a id="a4c8845f74f5e3458798abf53ff608a53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c8845f74f5e3458798abf53ff608a53">&#9670;&nbsp;</a></span>answer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HttpServer::answer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Makes the server answer. </p>
+
+</div>
+</div>
+<a id="a6d57f0987be2b2c6fc0e01ae212504ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d57f0987be2b2c6fc0e01ae212504ee">&#9670;&nbsp;</a></span>downloadFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HttpServer::downloadFile </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>The name of the file. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af478f57beeeddcb98dd625196c6461b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af478f57beeeddcb98dd625196c6461b0">&#9670;&nbsp;</a></span>launch()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -169,12 +229,36 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">void HttpServer::launch </td>
           <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>threadNumber</em> = <code>1</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Launches the server. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">threadNumber</td><td>The number of threads to use for responses. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3247e2fb2549f418a60cef585bead13c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3247e2fb2549f418a60cef585bead13c">&#9670;&nbsp;</a></span>listen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HttpServer::listen </td>
+          <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Launches the server. </p>
+<p>Makes the server listen. </p>
 
 </div>
 </div>
@@ -486,56 +570,7 @@ The callback function is called <b>before</b> anything is done with other member
 
 </div>
 </div>
-<a id="ac88c0057a5368e059661955a90a9a5c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac88c0057a5368e059661955a90a9a5c2">&#9670;&nbsp;</a></span>sendHTML()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void HttpServer::sendHTML </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Sends the response to the request. </p>
-
-</div>
-</div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a1e889f53e9fb311ca25d84590f5acbe0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e889f53e9fb311ca25d84590f5acbe0">&#9670;&nbsp;</a></span>client</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">sf::TcpSocket HttpServer::client</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>The socket connected to the client. </p>
-
-</div>
-</div>
 <a id="a666d85c396f04cc9c1e31afa2758b610"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a666d85c396f04cc9c1e31afa2758b610">&#9670;&nbsp;</a></span>listener</h2>
 
@@ -559,8 +594,8 @@ The callback function is called <b>before</b> anything is done with other member
 
 </div>
 </div>
-<a id="a87719cae838745eef366e77777d1f76d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87719cae838745eef366e77777d1f76d">&#9670;&nbsp;</a></span>requestLocation</h2>
+<a id="a87fe24c74560f3347f135d18259aadac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87fe24c74560f3347f135d18259aadac">&#9670;&nbsp;</a></span>mutex</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -569,7 +604,7 @@ The callback function is called <b>before</b> anything is done with other member
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string HttpServer::requestLocation</td>
+          <td class="memname">sf::Mutex HttpServer::mutex</td>
         </tr>
       </table>
   </td>
@@ -578,7 +613,97 @@ The callback function is called <b>before</b> anything is done with other member
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The location of the request. </p>
+
+</div>
+</div>
+<a id="ac6a0ee4514082ea720f5f836a2769b42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6a0ee4514082ea720f5f836a2769b42">&#9670;&nbsp;</a></span>requestList</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::queue&lt;std::pair&lt;std::string, std::unique_ptr&lt;sf::TcpSocket&gt; &gt; &gt; HttpServer::requestList</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The queue of all requests received. </p>
+
+</div>
+</div>
+<a id="a197d289497f1e6b7be0208a2d160744a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a197d289497f1e6b7be0208a2d160744a">&#9670;&nbsp;</a></span>savedFiles</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;std::string, std::string&gt; HttpServer::savedFiles</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Loaded files to avoid opening files all the time. </p>
+
+</div>
+</div>
+<a id="ae33b906a9962848a69aab075336003cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae33b906a9962848a69aab075336003cd">&#9670;&nbsp;</a></span>threadIndex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int HttpServer::threadIndex = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a95e566628ed168f09766cb4209d8e645"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95e566628ed168f09766cb4209d8e645">&#9670;&nbsp;</a></span>threads</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::unique_ptr&lt;sf::Thread&gt; &gt; HttpServer::threads</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The list of response threads. </p>
 
 </div>
 </div>
@@ -601,6 +726,7 @@ The callback function is called <b>before</b> anything is done with other member
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Sends the response to the request.</p>
 <p>Contains all the characteristics of all the actions related to the urls. </p>
 
 </div>

@@ -9,7 +9,21 @@ HttpServer::HttpServer(int port)
 	Log("Listening", "Port " + std::to_string(port), (int)ConsoleColor::GREEN).print();
 }
 
-void HttpServer::launch()
+void HttpServer::launch(int threadNumber)
+{
+	sf::Thread listener(&HttpServer::listen, this);
+	for(int i = 0; i < threadNumber; i++)
+		threads.push_back(std::make_unique<sf::Thread>(&HttpServer::answer, this));
+	listener.launch();
+	for(auto& f : threads)
+	{
+		f->launch();
+		sf::sleep(sf::milliseconds(100));
+		threadIndex++;
+	}
+}
+
+void HttpServer::listen()
 {
 	mutex.lock();
 	requestList.push(std::make_pair("", std::make_unique<sf::TcpSocket>()));
@@ -50,7 +64,9 @@ void HttpServer::launch()
 					break;
 			}
 
+			mutex.lock();
 			Log("Request (" + requestList.back().second->getRemoteAddress().toString() + ")", requestLocation, (int)ConsoleColor::PINK).print();
+			mutex.unlock();
 
 			if (fullRequest.find("POST") != std::string::npos)
 			{
@@ -72,46 +88,25 @@ void HttpServer::launch()
 
 void HttpServer::answer()
 {
+	int i = threadIndex;
 	while (true)
 	{
-		if (requestList.size() <= 1)
+		mutex.lock();
+		if (requestList.size() > 1)
 		{
-			sf::sleep(sf::milliseconds(100));
-			continue;
-		}
-		std::string filename;
-		std::string head;
-		std::string requestLocation = requestList.front().first;
-		std::map<std::string, std::string> parsedUrl = parseUrlLocation(requestLocation);
+			std::string requestLocation = requestList.front().first;
+			std::unique_ptr<sf::TcpSocket> client(requestList.front().second.release());
+			requestList.pop();
+			mutex.unlock();
 
-		bool found = false;
-		for (auto& f : urlChars)
-		{
-			if (parsedUrl["$$Location"] == f.url)
-			{
-				found = true;
+			std::string filename;
+			std::string head;
+			std::map<std::string, std::string> parsedUrl = parseUrlLocation(requestLocation);
 
-				f.var = &parsedUrl;
-				if (f.callback)
-					f.callback(&f);
-
-				head = "HTTP/1.1 " + std::to_string(f.code) + "\nContent-Type: " + f.mimeType + "\n";
-				if (f.code >= 300 && f.code < 400)
-				{
-					head += "Location: " + f.redirectUrl + "\n";
-				}
-				filename = f.filename;
-				Log("Response (" + requestList.front().second->getRemoteAddress().toString() + ")", requestLocation + " FOUND", (int)ConsoleColor::GREEN).print();
-				break;
-			}
-		}
-		if (!found)
-		{
-			Log("Response (" + requestList.front().second->getRemoteAddress().toString() + ")", requestLocation + " NOT FOUND", (int)ConsoleColor::RED).print();
-
+			bool found = false;
 			for (auto& f : urlChars)
 			{
-				if (f.code == 404 || f.url == "default")
+				if (parsedUrl["$$Location"] == f.url)
 				{
 					found = true;
 
@@ -120,47 +115,79 @@ void HttpServer::answer()
 						f.callback(&f);
 
 					head = "HTTP/1.1 " + std::to_string(f.code) + "\nContent-Type: " + f.mimeType + "\n";
+					if (f.code >= 300 && f.code < 400)
+					{
+						head += "Location: " + f.redirectUrl + "\n";
+					}
 					filename = f.filename;
+					mutex.lock();
+					Log("Response (" + client->getRemoteAddress().toString() + ")", requestLocation + " FOUND (Thread " + std::to_string(i) + ")", (int)ConsoleColor::GREEN).print();
+					mutex.unlock();
+					break;
 				}
 			}
-		}
+			if (!found)
+			{
+				mutex.lock();
+				Log("Response (" + client->getRemoteAddress().toString() + ")", requestLocation + " NOT FOUND", (int)ConsoleColor::RED).print();
+				mutex.unlock();
 
-		if (found)
-		{
-			std::string page = savedFiles[filename];
-			/*std::ifstream file(filename.c_str(), std::ifstream::binary);
-			bool started = false;
-			while (file.good())
-			{
-				if (!started)
+				for (auto& f : urlChars)
 				{
-					started = !started;
+					if (f.code == 404 || f.url == "default")
+					{
+						found = true;
+
+						f.var = &parsedUrl;
+						if (f.callback)
+							f.callback(&f);
+
+						head = "HTTP/1.1 " + std::to_string(f.code) + "\nContent-Type: " + f.mimeType + "\n";
+						filename = f.filename;
+					}
 				}
-				else page += '\n';
-				std::string buffer;
-				std::getline(file, buffer);
-				page += buffer;
-			}*/
-			for (auto& var : parsedUrl)
-			{
-				while (page.find(var.first) != std::string::npos)
-					page = replace(page, var.first, var.second);
 			}
-			head += "Content-Length: " + std::to_string(page.size()) + "\n\n" + page;
-			mutex.lock();
-			requestList.front().second->send(head.c_str(), head.size() + 1);
-			mutex.unlock();
+
+			if (found)
+			{
+				std::string page = savedFiles[filename];
+				/*std::ifstream file(filename.c_str(), std::ifstream::binary);
+				bool started = false;
+				while (file.good())
+				{
+					if (!started)
+					{
+						started = !started;
+					}
+					else page += '\n';
+					std::string buffer;
+					std::getline(file, buffer);
+					page += buffer;
+				}*/
+				for (auto& var : parsedUrl)
+				{
+					while (page.find(var.first) != std::string::npos)
+						page = replace(page, var.first, var.second);
+				}
+				head += "Content-Length: " + std::to_string(page.size()) + "\n\n" + page;
+				mutex.lock();
+				client->send(head.c_str(), head.size() + 1);
+				mutex.unlock();
+			}
+			else
+			{
+				std::string s = "HTTP/1.1 404 NOT FOUND\nContent-Type: text/html\nContent-Length: 155\n\n<!DOCTYPE HTML/>\n<html>\n<head>\n<title>Page Not Found</title>\n<meta charset=\"iso-8859-1\"/>\n</head><body>\n<h1>Error 404 : Page Not Found</h1>\n</body>\n</html>";
+				mutex.lock();
+				client->send(s.c_str(), s.size() + 1);
+				mutex.unlock();
+			}
 		}
 		else
 		{
-			std::string s = "HTTP/1.1 404 NOT FOUND\nContent-Type: text/html\nContent-Length: 155\n\n<!DOCTYPE HTML/>\n<html>\n<head>\n<title>Page Not Found</title>\n<meta charset=\"iso-8859-1\"/>\n</head><body>\n<h1>Error 404 : Page Not Found</h1>\n</body>\n</html>";
-			mutex.lock();
-			requestList.front().second->send(s.c_str(), s.size() + 1);
 			mutex.unlock();
+			sf::sleep(sf::milliseconds(100));
+			continue;
 		}
-		mutex.lock();
-		requestList.pop();
-		mutex.unlock();
 	}
 }
 

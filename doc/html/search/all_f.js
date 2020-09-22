@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['yellow_52',['YELLOW',['../_log_8h.html#a821042d5f30537f776ce823c5d66aadaa8a568e5f41b7e4da88fe5c4a00aad34e',1,'Log.h']]]
+  ['var_55',['var',['../class_url_char.html#a4b2bb494471bab5c6c5ebb8d8da4b229',1,'UrlChar']]]
 ];

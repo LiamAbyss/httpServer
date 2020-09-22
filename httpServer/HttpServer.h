@@ -76,13 +76,12 @@ public:
 	 */
 	HttpServer(int port = sf::Socket::AnyPort);
 
-	/** 
+	/**
 	 * \public
-	 * Launches the server. 
+	 * Launches the server.
+	 * \param threadNumber The number of threads to use for responses.
 	 */
-	void launch();
-
-	void answer();
+	void launch(int threadNumber = 1);
 
 	/**
 	 * \public
@@ -177,26 +176,45 @@ private:
 	 * The listener of the server.
 	 */
 	sf::TcpListener listener;
-
-	/** 
-	 * \private
-	 * The socket connected to the client.
-	 */
-	//sf::TcpSocket client;
-
-	/** 
-	 * \private
-	 * The location of the request.
-	 */
-	//std::string requestLocation;
 	
+	/** 
+	 * \private
+	 * The queue of all requests received.
+	 */
 	std::queue<std::pair<std::string, std::unique_ptr<sf::TcpSocket>>> requestList;
 
 	sf::Mutex mutex;
 
+	/** 
+	 * \private
+	 * Loaded files to avoid opening files all the time.
+	 */
 	std::map<std::string, std::string> savedFiles;
 
+	/**
+	 * \private
+	 * \param filename The name of the file.
+	 */
 	void downloadFile(std::string filename);
+
+	/** 
+	 * \private
+	 * The list of response threads. 
+	 */
+	std::vector<std::unique_ptr<sf::Thread>> threads;
+
+	/**
+	 * \public
+	 * Makes the server listen.
+	 */
+	void listen();
+
+	/** 
+	 * \public
+	 * Makes the server answer.
+	 */
+	void answer();
+	int threadIndex = 0;
 };
 
 /** 

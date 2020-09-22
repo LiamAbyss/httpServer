@@ -11,12 +11,17 @@ using namespace sf;
 
 void doStuff(UrlChar* chars)
 {
+	// Redirects the user to "/home" if he didn't click the button
+	auto& var = *chars->var;
+	if(var.find("$body") == var.end() || var.find("$sender") == var.end() || var.find("$recipient") == var.end())
+	{
+		chars->code = 301;
+		chars->redirectUrl = "/home";
+		return;
+	}
+
 	// Changes the body variable of the page (in this case the body of the fake mail)
 	chars->var->at("$body") = "Well, I guess not.";
-
-	// Redirects the user to "/img"
-	/*chars->code = 301;
-	chars->redirectUrl = "/img";*/
 }
 
 int main()
@@ -31,10 +36,7 @@ int main()
 		.req("/sendmail", 200, "text/html", "webSrc/sendmail.html", doStuff) // Uses doStuff(UrlChar*) as a callback
 		.req("/img", 200, "image/png", "webSrc/img.png")
 		.req("/ogg", 200, "audio/ogg", "webSrc/mettaton.ogg")
-		.req("/", 301, "/home");
-	Thread launch(&HttpServer::launch, &server);
-	Thread answer(&HttpServer::answer, &server);
-	launch.launch();
-	answer.launch();
+		.req("/loaderio-4db54377b4e344be0bc09288db5301eb.txt", 200, "text/plain", "webSrc/loaderio-4db54377b4e344be0bc09288db5301eb.txt")
+		.req("/", 301, "/home").launch(2);
 	return 0;
 }

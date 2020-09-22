@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dostuff_61',['doStuff',['../example_8cpp.html#aded9a72aab34691c7ed9e4653f3639fb',1,'example.cpp']]]
+  ['answer_66',['answer',['../class_http_server.html#a4c8845f74f5e3458798abf53ff608a53',1,'HttpServer']]]
 ];

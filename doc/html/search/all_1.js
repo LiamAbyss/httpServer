@@ -1,8 +1,11 @@
 var searchData=
 [
-  ['callback_8',['callback',['../class_url_char.html#a657845fcd4aadc18b7552a0b1de7dd17',1,'UrlChar']]],
-  ['client_9',['client',['../class_http_server.html#a1e889f53e9fb311ca25d84590f5acbe0',1,'HttpServer']]],
-  ['code_10',['code',['../class_url_char.html#a01d09e17101745b013645c39d0346d2d',1,'UrlChar']]],
-  ['consolecolor_11',['ConsoleColor',['../_log_8h.html#a821042d5f30537f776ce823c5d66aada',1,'Log.h']]],
-  ['cyan_12',['CYAN',['../_log_8h.html#a821042d5f30537f776ce823c5d66aadaa344dd8cd533280795b9db82ef0c92749',1,'Log.h']]]
+  ['blue_1',['BLUE',['../_log_8h.html#a821042d5f30537f776ce823c5d66aadaa1b3e1ee9bff86431dea6b181365ba65f',1,'Log.h']]],
+  ['bright_5fblue_2',['BRIGHT_BLUE',['../_log_8h.html#a821042d5f30537f776ce823c5d66aadaad187a715c27ec1e774325b6715f4da67',1,'Log.h']]],
+  ['bright_5fcyan_3',['BRIGHT_CYAN',['../_log_8h.html#a821042d5f30537f776ce823c5d66aadaaa74a6a719de5de03a46f89ce260fa4b7',1,'Log.h']]],
+  ['bright_5fgreen_4',['BRIGHT_GREEN',['../_log_8h.html#a821042d5f30537f776ce823c5d66aadaa7ca9c0eccf9c3fa7fe85fea8404d50a9',1,'Log.h']]],
+  ['bright_5fpink_5',['BRIGHT_PINK',['../_log_8h.html#a821042d5f30537f776ce823c5d66aadaaea201884332addfddf32b5cd778e1eff',1,'Log.h']]],
+  ['bright_5fred_6',['BRIGHT_RED',['../_log_8h.html#a821042d5f30537f776ce823c5d66aadaa01fd5046e2769cae7b662d3dfbb64045',1,'Log.h']]],
+  ['bright_5fwhite_7',['BRIGHT_WHITE',['../_log_8h.html#a821042d5f30537f776ce823c5d66aadaa376520e57593580aa5c7ef8cf5136946',1,'Log.h']]],
+  ['bright_5fyellow_8',['BRIGHT_YELLOW',['../_log_8h.html#a821042d5f30537f776ce823c5d66aadaa2373edc9b8eb3a49710b95c6f7906434',1,'Log.h']]]
 ];
