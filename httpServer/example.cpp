@@ -28,7 +28,7 @@ int main()
 {
 	// Create the server and set it on port 8080
 	HttpServer server(8080);
-	
+	server.logs = false;
 	// Prepare the server responses
 	server.req("/home", 200, "text/html", "webSrc/index.html")
 		.req("/index.css", 200, "text/css", "webSrc/index.css")
@@ -37,6 +37,6 @@ int main()
 		.req("/img", 200, "image/png", "webSrc/img.png")
 		.req("/ogg", 200, "audio/ogg", "webSrc/mettaton.ogg")
 		.req("/loaderio-4db54377b4e344be0bc09288db5301eb.txt", 200, "text/plain", "webSrc/loaderio-4db54377b4e344be0bc09288db5301eb.txt")
-		.req("/", 301, "/home").launch(3);
+		.req("/", 301, "/home").launch(1);
 	return 0;
 }

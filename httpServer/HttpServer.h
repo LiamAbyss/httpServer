@@ -134,6 +134,8 @@ public:
 	 */
 	HttpServer& req(std::string url, unsigned short code, std::string redirectUrl, std::function<void(UrlChar*)> callback);
 
+	bool logs = true;
+	bool saving = true;
 private:
 
 	/**

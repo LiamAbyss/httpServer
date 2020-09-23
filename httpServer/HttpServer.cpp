@@ -12,6 +12,7 @@ HttpServer::HttpServer(int port)
 void HttpServer::launch(int threadNumber)
 {
 	sf::Thread listener(&HttpServer::listen, this);
+	//listener.launch();
 	for (int i = 0; i < threadNumber; i++)
 	{
 		threads.push_back(std::make_unique<sf::Thread>(&HttpServer::answer, this));
@@ -67,9 +68,12 @@ void HttpServer::listen()
 					break;
 			}
 
-			mutex.lock();
-			Log("Request (" + client->getRemoteAddress().toString() + ")", requestLocation + " (Thread " + std::to_string(index) + ")", (int)ConsoleColor::PINK).print();
-			mutex.unlock();
+			if (logs)
+			{
+				mutex.lock();
+				Log("Request (" + client->getRemoteAddress().toString() + ")", requestLocation + " (Thread " + std::to_string(index) + ")", (int)ConsoleColor::PINK).print();
+				mutex.unlock();
+			}
 
 			if (fullRequest.find("POST") != std::string::npos)
 			{
@@ -121,21 +125,27 @@ void HttpServer::answer()
 						head += "Location: " + f.redirectUrl + "\n";
 					}
 					filename = f.filename;
-					mutex.lock();
-					Log("Response (" + client->getRemoteAddress().toString() + ")", requestLocation + " FOUND (Thread " + std::to_string(index) + ")", (int)ConsoleColor::GREEN).print();
-					mutex.unlock();
+					if (logs)
+					{
+						mutex.lock();
+						Log("Response (" + client->getRemoteAddress().toString() + ")", requestLocation + " FOUND (Thread " + std::to_string(index) + ")", (int)ConsoleColor::GREEN).print();
+						mutex.unlock();
+					}
 					break;
 				}
 			}
 			if (!found)
 			{
-				mutex.lock();
-				Log("Response (" + client->getRemoteAddress().toString() + ")", requestLocation + " NOT FOUND", (int)ConsoleColor::RED).print();
-				mutex.unlock();
+				if (logs)
+				{
+					mutex.lock();
+					Log("Response (" + client->getRemoteAddress().toString() + ")", requestLocation + " NOT FOUND", (int)ConsoleColor::RED).print();
+					mutex.unlock();
+				}
 
 				for (auto& f : urlChars)
 				{
-					if (f.code == 404 || f.url == "default")
+					if (f.code == 404 || f.url == formatUrl("default"))
 					{
 						found = true;
 
@@ -144,6 +154,8 @@ void HttpServer::answer()
 							f.callback(&f);
 
 						head = "HTTP/1.1 " + std::to_string(f.code) + "\nContent-Type: " + f.mimeType + "\n";
+						if (f.redirectUrl.size())
+							head += "Location: " + f.redirectUrl + "\n";
 						filename = f.filename;
 					}
 				}
@@ -151,20 +163,25 @@ void HttpServer::answer()
 
 			if (found)
 			{
-				std::string page = savedFiles[filename];
-				/*std::ifstream file(filename.c_str(), std::ifstream::binary);
-				bool started = false;
-				while (file.good())
+				std::string page;
+				if(saving)
+					page = savedFiles[filename];
+				else
 				{
-					if (!started)
+					std::ifstream file(filename.c_str(), std::ifstream::binary);
+					bool started = false;
+					while (file.good())
 					{
-						started = !started;
+						if (!started)
+						{
+							started = !started;
+						}
+						else page += '\n';
+						std::string buffer;
+						std::getline(file, buffer);
+						page += buffer;
 					}
-					else page += '\n';
-					std::string buffer;
-					std::getline(file, buffer);
-					page += buffer;
-				}*/
+				}
 				if (mimeType.find("text") != std::string::npos || mimeType.find("application") != std::string::npos)
 				{
 					for (auto& var : parsedUrl)
@@ -173,7 +190,7 @@ void HttpServer::answer()
 						r = std::regex(std::regex_replace(var.first, r, "\\$"));
 						page = std::regex_replace(page, r, var.second);
 					}
-					std::regex r("\\$[a-zA-Z0-9]*");
+					std::regex r("\\$[a-zA-Z0-9]+");
 					page = std::regex_replace(page, r, "null");
 				}
 				head += "Content-Length: " + std::to_string(page.size()) + "\n\n" + page;
@@ -205,7 +222,8 @@ HttpServer& HttpServer::req(std::string url, unsigned short code, std::string mi
 	buffer.code = code;
 	buffer.mimeType = mimeType;
 	buffer.filename = filename;
-	downloadFile(filename);
+	if (saving)
+		downloadFile(filename);
 	urlChars.push_back(buffer);
 
 	return *this;
@@ -219,7 +237,8 @@ HttpServer& HttpServer::req(std::string url, unsigned short code, std::string mi
 	buffer.mimeType = mimeType;
 	buffer.filename = filename;
 	buffer.callback = callback;
-	downloadFile(filename);
+	if (saving)
+		downloadFile(filename);
 
 	urlChars.push_back(buffer);
 
