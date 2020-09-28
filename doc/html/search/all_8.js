@@ -5,5 +5,6 @@ var searchData=
   ['listener_28',['listener',['../class_http_server.html#a666d85c396f04cc9c1e31afa2758b610',1,'HttpServer']]],
   ['log_29',['Log',['../class_log.html',1,'Log'],['../class_log.html#ae09ae3e49a9d9cdafe45bac6db7e8106',1,'Log::Log()']]],
   ['log_2ecpp_30',['Log.cpp',['../_log_8cpp.html',1,'']]],
-  ['log_2eh_31',['Log.h',['../_log_8h.html',1,'']]]
+  ['log_2eh_31',['Log.h',['../_log_8h.html',1,'']]],
+  ['logs_32',['logs',['../class_http_server.html#a17442e5ad19793cddbdb2cdf32d3cb25',1,'HttpServer']]]
 ];

@@ -14,9 +14,11 @@ var class_http_server =
     [ "req", "class_http_server.html#af37e56b73b82fe88e0e569d50e306e29", null ],
     [ "req", "class_http_server.html#a1f5bf9b71840ee1c2c43f798c478f053", null ],
     [ "listener", "class_http_server.html#a666d85c396f04cc9c1e31afa2758b610", null ],
+    [ "logs", "class_http_server.html#a17442e5ad19793cddbdb2cdf32d3cb25", null ],
     [ "mutex", "class_http_server.html#a87fe24c74560f3347f135d18259aadac", null ],
     [ "requestList", "class_http_server.html#ac6a0ee4514082ea720f5f836a2769b42", null ],
     [ "savedFiles", "class_http_server.html#a197d289497f1e6b7be0208a2d160744a", null ],
+    [ "saving", "class_http_server.html#aa08cfe466157a54cc84515b760341155", null ],
     [ "threadIndex", "class_http_server.html#ae33b906a9962848a69aab075336003cd", null ],
     [ "threads", "class_http_server.html#a95e566628ed168f09766cb4209d8e645", null ],
     [ "urlChars", "class_http_server.html#a9ef7db2854bd5a5d41912c39bc3eda24", null ]
